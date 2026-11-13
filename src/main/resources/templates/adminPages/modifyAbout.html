@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>modifier accueil</title>
+</head>
+
+<body class="index-content-modify-body">
+    <h1>Modifier Accueil</h1>
+
+    <form th:action="@{/aboutcontent/updateabout}" th:object="${aboutcontent1}" method="post"
+        enctype="multipart/form-data">
+
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <input type="number" name="id" id="id" th:field="*{id}" class="id-input" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="header2" id="header2" th:field="*{header2}"  required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="previewImage">
+                        <img th:src="@{'data:image/*;base64,'+${aboutcontent1.generateBase64Image()}}"
+                            style="max-width: 240px; max-height: 160px;" />
+                    </p>
+                    <input type="file" accept="image/*" name="imagefile" id="imagefile"
+                        onchange="document.getElementById('previewImage').remove();" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea name="aboutText" id="aboutText" rows="4" cols="100" th:field="*{aboutText}" wrap="hard"
+                        required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2 style="text-align:right">
+                    <button onclick="window.location.href='/aboutcontent'; return false;" class="btn btn-dark">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">Enregestrer</button>
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+</body>
+
+</html>

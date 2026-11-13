@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>modifier service</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="services-content-modify-body">
+    <form th:action="@{/servicesContent/updateservice}" th:object="${servicecontent}" method="post"
+        enctype="multipart/form-data">
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><label for="ID">ID:</label></td>
+            <td>
+                <input type="number" name="id" id="id" th:field="*{id}" class="id-input" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="service-photo">Photo:</label></td>
+            <td>
+                <p id="previewImage">
+                    <img th:src="@{'data:image/*;base64,'+${servicecontent.generateBase64Image()}}"
+                        style="max-width: 240px; max-height: 160px;" />
+                </p>
+                <input type="file" accept="image/*" name="imagefile" id="imagefile"
+                    onchange="document.getElementById('previewImage').remove();" />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="service-titre">service:</label></td>
+            <td>
+                <input type="text" name="service" id="service" th:field="*{h3Service}" required />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="service-text">service text:</label></td>
+            <td>
+                <textarea name="text" id="text" rows="4" cols="100" th:field="*{Service}" wrap="hard"
+                    required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2 style="text-align:right">
+                <button onclick="window.location.href='/servicesContent'; return false;" class="btn btn-dark">
+                    Annuler
+                </button>
+                <button type="submit" class="btn btn-primary">Enregestrer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vivoconsutl</title>
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="css/all.min.css" />
+    <!-- Main Template CSS File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <a class="logo" th:href="@{index}"><img src="images/logo2.png" alt=""></a>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+        <label for="menu-toggle" class="menu-toggle-label"><i class="fa-solid fa-bars"></i></label>
+        <nav class="navigation">
+            <a th:href="@{index}" >ACCUEIL</a>
+            <a th:href="@{services}">SERVICES</a>
+            <a th:href="@{about}" class="active">NOTRE ENTREPRISE</a>
+            <a th:href="@{contact}">CONTACT</a>
+        </nav>
+    </header>
+
+    <section class="aboout-us-section">
+        <h2 class="about-us-title">Notre Entreprise</h2>
+        <div class="about-us-content">
+            <div class="about-us-image">
+                <img th:src="@{'data:image/*;base64,'+${aboutcontent.generateBase64Image()}}" />
+            </div>
+            <div class="about-us-text">
+                <h3 th:text="${aboutcontent.header2}"></h3>
+                <p th:text="${aboutcontent.aboutText}"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-contact">
+            <div class="footer-content">
+                <div class="contactez-nous">
+                    <h3>
+                        Contactez-nous
+                    </h3>
+                    <form method="post" action="/messages/add" th:object="${msg}">
+                        <span class="contactez-nous-descreption">Envoie nous un message</span>
+                        <input type="text" id="full-name" placeholder="nom et prénom" class="full-name-input"
+                            th:field="*{name}" required>
+                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                            th:error="$(UserMessageSend.name)"></p>
+                        <input type="email" id="mail" placeholder="votre email" class="email-input" th:field="*{mail}" required>
+                        <p th:if="${#fields.hasErrors('mail')}" th:errorclass="text-danger"
+                            th:error="$(UserMessageSend.mail)"></p>
+                        <textarea id="message-send" rows="4" cols="50" placeholder="votre message" class="message-input"
+                            th:field="*{message}" required></textarea>
+                        <p th:if="${#fields.hasErrors('message')}" th:errorclass="text-danger"
+                            th:error="$(UserMessageSend.message)"></p>
+                        <button type="submit" class="send-btn">envoyer</button>
+                        <!--<a href="#" class="send-btn">envoyer</a>-->
+                    </form>
+                </div>
+                <div class="site-plan">
+                    <h3>
+                        plan du site
+                    </h3>
+                    <span class="plan-descreption">toute nos pages</span>
+                    <nav class="site-plan-liks">
+                        <a th:href="@{index}" >ACCUEIL</a>
+                        <a th:href="@{services}">SERVICES</a>
+                        <a th:href="@{about}" >NOTRE ENTREPRISE</a>
+                        <a th:href="@{contact}">CONTACT</a>
+                    </nav>
+                </div>
+                <div class="footer-logo">
+                    <div class="footer-logo-image">
+                        <img src="images/logo.png" alt="">
+                    </div>
+                    <div class="footer-contact-info">
+                        <div class="phone-number-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="phone-number-nb">+212 528302940</span>
+                        </div>
+                        <div class="gmail-box">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span class="email-txt">contact.vivoconsult<br>@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="copyright-text">
+                <span>Copyright 2024 All right reserved vivoconsult</span>
+            </div>
+            <div class="copyright-icons">
+                <a href="https://www.facebook.com/vivoconsult/" target="_blank" class="fb-link-footer">
+                    <i class="fa-brands fa-square-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/vivo-consult-33952aa8/?originalSubdomain=eh" target="_blank" class="in-link-footer">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="#" target="_blank" class="ins-link-footer">
+                    <i class="fa-brands fa-square-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
